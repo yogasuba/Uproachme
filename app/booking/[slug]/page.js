@@ -66,7 +66,7 @@ export default function BookingPage({ params }) {
     <div className="min-h-screen flex flex-col">
       {/* Back Button */}
       <button
-        className="flex items-center text-gray-800 font-bold p-2 ml-2"
+        className="flex items-center text-gray-800 font-bold p-2"
         onClick={() => router.back()}
       >
         <Image

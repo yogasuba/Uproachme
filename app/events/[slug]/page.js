@@ -83,44 +83,44 @@ export const eventDetails = {
       '07:00 PM', '07:30 PM', '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM'
     ];
 
-// Function to get the next 7 days starting from the 1st of the selected month
-const getNextSevenDays = (year, month) => {
-    const daysArray = [];
-    const firstDayOfMonth = new Date(year, month, 1);
-  
-    for (let i = 0; i < 7; i++) {
-      const nextDay = new Date(firstDayOfMonth);
-      nextDay.setDate(firstDayOfMonth.getDate() + i);
-  
-      const day = nextDay.toLocaleString('en-US', { weekday: 'short' });
-      const date = nextDay.toLocaleString('en-US', { day: 'numeric', month: 'short' });
-  
-      // Return the actual Date object instead of formatted strings
-      daysArray.push({ day, date, fullDate: nextDay });
-    }
+    // Function to get the next 7 days starting from the 1st of the selected month
+    const getNextSevenDays = (year, month) => {
+        const daysArray = [];
+        const firstDayOfMonth = new Date(year, month, 1);
+    
+        for (let i = 0; i < 7; i++) {
+        const nextDay = new Date(firstDayOfMonth);
+        nextDay.setDate(firstDayOfMonth.getDate() + i);
+    
+        const day = nextDay.toLocaleString('en-US', { weekday: 'short' });
+        const date = nextDay.toLocaleString('en-US', { day: 'numeric', month: 'short' });
+    
+        // Return the actual Date object instead of formatted strings
+        daysArray.push({ day, date, fullDate: nextDay });
+        }
   
     return daysArray;
-  };
+    };
   
-  const [days, setDays] = useState(getNextSevenDays(currentYear, selectedMonth));
-  
-  // Function to format selected date based on the full date
-  const formatSelectedDate = (selectedDay) => {
-    if (selectedDay !== null && days[selectedDay]) {
-      const { fullDate } = days[selectedDay];
-  
-      const month = fullDate.toLocaleString('en-US', { month: 'short' });
-      const day = fullDate.toLocaleString('en-US', { day: 'numeric' });
-      const fullDateString = fullDate.toLocaleString('en-US', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'short'
-      });
-  
-      return { month, day, fullDate: fullDateString };
-    }
-    return {};
-  };
+    const [days, setDays] = useState(getNextSevenDays(currentYear, selectedMonth));
+    
+    // Function to format selected date based on the full date
+    const formatSelectedDate = (selectedDay) => {
+        if (selectedDay !== null && days[selectedDay]) {
+        const { fullDate } = days[selectedDay];
+    
+        const month = fullDate.toLocaleString('en-US', { month: 'short' });
+        const day = fullDate.toLocaleString('en-US', { day: 'numeric' });
+        const fullDateString = fullDate.toLocaleString('en-US', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'short'
+        });
+    
+        return { month, day, fullDate: fullDateString };
+        }
+        return {};
+    };
 
     // Function to get the end time based on the selected time
     const getTimeRange = (selectedTime) => {
@@ -149,9 +149,9 @@ const getNextSevenDays = (year, month) => {
     const selectedDateInfo = selectedDate !== null ? formatSelectedDate(selectedDate) : {};
     const selectedTimeRange = getTimeRange(selectedTime); // Get the time range
 
-  // Save the date and time to localStorage
-localStorage.setItem('selectedDateInfo', JSON.stringify(selectedDateInfo));
-localStorage.setItem('selectedTimeRange', selectedTimeRange);
+    // Save the date and time to localStorage
+    localStorage.setItem('selectedDateInfo', JSON.stringify(selectedDateInfo));
+    localStorage.setItem('selectedTimeRange', selectedTimeRange);
     const event = eventDetails[slug];
   
     if (!event) {
@@ -171,7 +171,7 @@ localStorage.setItem('selectedTimeRange', selectedTimeRange);
     return (
       <div className="min-h-screen flex flex-col">
         {/* Back Button */}
-        <button className="flex items-center text-gray-800 font-bold p-2 ml-2" onClick={() => router.back()}>
+        <button className="flex items-center text-gray-800 font-bold p-2 " onClick={() => router.back()}>
           <Image src="/icons/back-arrow.svg" alt="Back Arrow" width={16} height={16} />
           <span className="ml-2">Back</span>
         </button>
