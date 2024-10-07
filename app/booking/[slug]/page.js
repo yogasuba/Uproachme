@@ -1,12 +1,20 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react"; 
 import { eventDetails } from "../../events/[slug]/page"; // Ensure correct import path
 
 export default function BookingPage({ params }) {
   const router = useRouter();
   const slug = params?.slug;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    whatsappNumber: "",
+  });
 
+  const [isFormValid, setIsFormValid] = useState(false);
 
   if (!slug) {
     return (
@@ -37,6 +45,22 @@ export default function BookingPage({ params }) {
       </div>
     );
   }
+    // Handle form input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+    
+        // Validate the form: Check if all fields have values
+        const isValid =
+          formData.name.trim() &&
+          formData.email.trim() &&
+          formData.message.trim() &&
+          formData.whatsappNumber.trim();
+        setIsFormValid(isValid);
+      };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -56,18 +80,21 @@ export default function BookingPage({ params }) {
 
 
       {/* Main Grid Container */}
-      <div className="flex-1 w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr]  pt-1">
+      <div className="flex-1 w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] pt-1">
         {/* Left Column: Booking Form */}
         <div className="bg-white gap-6 pr-20 pl-20 pt-5 shadow-md w-full">
           <form className="space-y-4">
             {/* Name */}
             <div>
-              <label className="block text -sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Name
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm"
                 placeholder="Enter Your Name"
                 required
               />
@@ -80,7 +107,10 @@ export default function BookingPage({ params }) {
               </label>
               <input
                 type="email"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm"
                 placeholder="Enter Your Email"
                 required
               />
@@ -92,7 +122,10 @@ export default function BookingPage({ params }) {
                 What Is The Call About?
               </label>
               <textarea
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm"
                 placeholder="Enter Your Message"
                 required
               />
@@ -103,46 +136,79 @@ export default function BookingPage({ params }) {
               <label className="block text-sm font-medium text-gray-700">
                 WhatsApp Number
               </label>
-              <div className="mt-2 flex items-center border border-gray-300 rounded-md p-2">
-                    <div className="flex items-center space-x-2 pr-2 border-r border-gray-300">
-                        <img src="/icons/india 1.svg" alt="India Flag" className="h-5 w-5" />
-                        <img src="/icons/chevron-down.svg" alt="Arrow Down" className="h-3 w-3" />
-                    </div>
-                    
-                    {/* Input Field */}
-                    <input
-                    type="text"
-                    placeholder="Enter Your Number"
-                    className="ml-2 flex-1 focus:outline-none"
-                    />
-              </div>
-                <div className="mt-4 flex items-center">
-                    <input type="checkbox" id="phoneCheckbox" className="mr-2" />
-                    <label htmlFor="phoneCheckbox" className="text-sm text-gray-500">
-                        Receive Booking Details On Phone
-                    </label>
+              <div className="mt-2 flex items-center border border-gray-300 rounded-md p-2 text-sm">
+                <div className="flex items-center space-x-2 pr-2 border-r border-gray-300">
+                  <img
+                    src="/icons/india 1.svg"
+                    alt="India Flag"
+                    className="h-5 w-5"
+                  />
+                  <img
+                    src="/icons/chevron-down.svg"
+                    alt="Arrow Down"
+                    className="h-3 w-3"
+                  />
                 </div>
+
+                {/* Input Field */}
+                <input
+                  type="text"
+                  name="whatsappNumber"
+                  value={formData.whatsappNumber}
+                  onChange={handleInputChange}
+                  placeholder="Enter Your Number"
+                  className="ml-2 flex-1 focus:outline-none"
+                />
+              </div>
+              <div className="mt-4 flex items-center">
+                <input type="checkbox" id="phoneCheckbox" className="mr-2" />
+                <label
+                  htmlFor="phoneCheckbox"
+                  className="text-sm text-gray-500"
+                >
+                  Receive Booking Details On Phone
+                </label>
+              </div>
             </div>
 
             {/* Terms of Use */}
             <div className="text-xs text-gray-500 ">
-                <p className="mb-1 mt-9">
-                    By Proceeding, You Confirm That You Have Read and Agree 
-                </p>
-                <p>
-                   To <a href="/terms" className="text-purple-600 font-bold hover:underline">Uproach.Me Terms of Use</a> and{" "}
-                    <a href="/privacy" className="text-purple-600 font-bold hover:underline ">Privacy Notes</a>.
-                </p>
+              <p className="mb-1 mt-9">
+                By Proceeding, You Confirm That You Have Read and Agree
+              </p>
+              <p>
+                To{" "}
+                <a
+                  href="/terms"
+                  className="text-purple-600 font-bold hover:underline"
+                >
+                  Uproach.Me Terms of Use
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/privacy"
+                  className="text-purple-600 font-bold hover:underline"
+                >
+                  Privacy Notes
+                </a>
+                .
+              </p>
             </div>
 
             {/* Confirm And Pay Button */}
             <div className="mt-8">
-                <button
-                    className="bg-purple-600 text-white hover:bg-purple-500 px-6 py-3 text-lg font-semibold w-full rounded-md"
-                    onClick={() => router.push(`/scheduled/${slug}`)} 
-                >
-                    Confirm And Pay
-                </button>
+              <button
+                type="button"
+                disabled={!isFormValid} // Disable the button if form is not valid
+                className={`${
+                  isFormValid
+                    ? "bg-purple-600 text-white hover:bg-purple-500"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                } px-6 py-3 text-lg font-semibold w-full rounded-md`}
+                onClick={() => router.push(`/scheduled/${slug}`)}
+              >
+                Confirm And Pay
+              </button>
             </div>
           </form>
         </div>
@@ -218,15 +284,15 @@ export default function BookingPage({ params }) {
           <h3 className="text-m font-semibold mt-6">Description</h3>
           <p className="text-gray-600 mt-2">{event.description}</p>
 
-          <div className="mt-6">
-            <h3 className="text-m font-semibold">Order Summary</h3>
-
+          <div className="mt-6">            
             {event.price === '' ? (
                 // Show this content when the event price is empty
-                <p className="text-sm text-gray-600 mt-2">Booking is free.</p>
+                <p className="justify-between border-2 ml-40 rounded-2xl bg-purple-200 font-bold px-6 py-3 w-[223px] mt-8 text-center">Booking is free!</p>
             ) : event.price === '₹500' ? (
                 // Show this content when the event price is ₹500
+                
                 <div className="mt-2 bg-white p-4 rounded-lg shadow-sm border h-[195px]">
+                    <h3 className="text-m font-semibold">Order Summary</h3>
                     {/* First Item */}
                     <div className="flex justify-between py-2 border-b border-dotted border-gray-400 m-3">
                         <p className="text-sm font-medium text-gray-600">1 x quick chat on {event.title}</p>
@@ -260,7 +326,7 @@ export default function BookingPage({ params }) {
             )}
             </div>
             {/* Footer (Powered By) */}
-            <div className="text-gray-500 text-sm mt-12 flex justify-center">
+            <div className="text-gray-500 text-sm mt-9 mb-9 flex justify-center">
                 Powered by <a href="#" className="text-purple-600 font-bold hover:underline ml-1">Uproach.Me</a>
             </div>
         </div>
