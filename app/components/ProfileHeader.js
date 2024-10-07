@@ -18,21 +18,21 @@ export const ProfileHeader = ({ showShareButton = true, roundedClass = "" }) => 
           <Image
             src="/profile-photo.png" // Replace with your image path
             alt="Profile Picture"
-            width={50}
-            height={50}
-            className="rounded-full"
+            width={40} // Smaller width for mobile
+            height={40} // Smaller height for mobile
+            className="rounded-full sm:w-50 sm:h-50" // Larger size for desktop
           />
           <div>
             {/* Name */}
-            <h1 className="text-2xl font-bold">Vignesh Kumar</h1>
+            <h1 className="text-lg font-bold sm:text-2xl">Vignesh Kumar</h1>
 
             {/* Location with Map Icon */}
-            <div className="flex items-center text-gray-500">
+            <div className="flex items-center text-sm text-gray-500 sm:text-base">
               <Image
                 src="/icons/map-pin.svg" // Path to your map icon in the public folder
                 alt="Map Icon"
-                width={16} 
-                height={16}
+                width={14} // Smaller size for mobile
+                height={14}
                 className="mr-1"
               />
               <p>Mangalampet, Tamil Nadu</p>
@@ -43,15 +43,16 @@ export const ProfileHeader = ({ showShareButton = true, roundedClass = "" }) => 
         {/* Right Section: Share Button */}
         {showShareButton && (
           <button
-            className="ml-auto text-purple-500 flex items-center space-x-2"
+            className="ml-auto text-sm text-purple-500 flex items-center space-x-2 sm:text-base"
             onClick={toggleModal} // Toggle modal on click
           >
             <span>Share</span>
             <Image
               src="/icons/download.svg" // Path to your custom share icon in the public folder
               alt="Share Icon"
-              width={16}
-              height={16}
+              width={14} // Smaller icon for mobile
+              height={14}
+              className="sm:w-5 sm:h-5" // Larger size for desktop
             />
           </button>
         )}
@@ -83,73 +84,74 @@ export const ProfileHeader = ({ showShareButton = true, roundedClass = "" }) => 
 
               {/* Share Links */}
               <div className="flex flex-col items-center space-y-4 mt-4 mb-4">
-                <div className="flex justify-center space-x-3"> {/* Adjusted spacing */}
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}> {/* Fixed width */}
-                        <a href="#" className="p-2 bg-gray-800 rounded-full">
-                            <Image
-                            src="/icons/mdi_link-variant.svg"
-                            alt="Link Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">Copy url</p>
-                    </div>
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}>
-                        <a href="#" className="p-2 bg-[#26D367] rounded-full">
-                            <Image
-                            src="/icons/ic_baseline-whatsapp.svg"
-                            alt="WhatsApp Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">WhatsApp</p>
-                    </div>
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}>
-                        <a href="#" className="p-2 bg-gradient-to-br from-[#8C48DB] via-[#CC4499] via-[#F7416C] via-[#FE7C4A] to-[#FFB133] rounded-full">
-                            <Image
-                            src="/icons/ion_logo-instagram.svg"
-                            alt="Instagram Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">Instagram</p>
-                    </div>
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}>
-                        <a href="#" className="p-2 bg-[#27A1FC] rounded-full">
-                            <Image
-                            src="/icons/icons8-telegram-app.svg"
-                            alt="Telegram Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">Telegram</p>
-                    </div>
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}>
-                        <a href="#" className="p-2 bg-[#1DA1F3] rounded-full">
-                            <Image
-                            src="/icons/radix-icons_twitter-logo.svg"
-                            alt="Twitter Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">Twitter</p>
-                    </div>
-                    <div className="flex flex-col items-center" style={{ width: '60px' }}>
-                        <a href="#" className="p-2 bg-[#3B3B3B] rounded-full">
-                            <Image
-                            src="/icons/icon_doted.svg"
-                            alt="More Icon"
-                            width={20}
-                            height={20}
-                            />
-                        </a>
-                        <p className="mt-2 text-xs text-center text-gray-600">More</p>
-                    </div>
+                <div className="flex justify-center space-x-3">
+                  {/* Adjusted spacing */}
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}> {/* Smaller width */}
+                    <a href="#" className="p-2 bg-gray-800 rounded-full">
+                      <Image
+                        src="/icons/mdi_link-variant.svg"
+                        alt="Link Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">Copy url</p>
+                  </div>
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}>
+                    <a href="#" className="p-2 bg-[#26D367] rounded-full">
+                      <Image
+                        src="/icons/ic_baseline-whatsapp.svg"
+                        alt="WhatsApp Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">WhatsApp</p>
+                  </div>
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}>
+                    <a href="#" className="p-2 bg-gradient-to-br from-[#8C48DB] via-[#CC4499] to-[#FFB133] rounded-full">
+                      <Image
+                        src="/icons/ion_logo-instagram.svg"
+                        alt="Instagram Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">Instagram</p>
+                  </div>
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}>
+                    <a href="#" className="p-2 bg-[#27A1FC] rounded-full">
+                      <Image
+                        src="/icons/icons8-telegram-app.svg"
+                        alt="Telegram Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">Telegram</p>
+                  </div>
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}>
+                    <a href="#" className="p-2 bg-[#1DA1F3] rounded-full">
+                      <Image
+                        src="/icons/radix-icons_twitter-logo.svg"
+                        alt="Twitter Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">Twitter</p>
+                  </div>
+                  <div className="flex flex-col items-center" style={{ width: '50px' }}>
+                    <a href="#" className="p-2 bg-[#3B3B3B] rounded-full">
+                      <Image
+                        src="/icons/icon_doted.svg"
+                        alt="More Icon"
+                        width={16} // Smaller icon size for mobile
+                        height={16}
+                      />
+                    </a>
+                    <p className="mt-2 text-xs text-center text-gray-600 sm:text-[10px]">More</p>
+                  </div>
                 </div>
               </div>
             </div>

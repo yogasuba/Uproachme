@@ -7,51 +7,53 @@ import { ProfileHeader } from '../components/ProfileHeader';
 
 
 
+
 export default function HomePage() {
-    return (
-      <div className="w-full">
-        {/* Full-width Profile Section without any space */}
-        <ProfileHead /> {/* Include the ProfileHead component to render the "Create Your Profile" section */}
-        <ProfileHeader />
-        {/* Grid Layout for Tabs, Sections, and Event List */}
-        <div className="w-full mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column (Tabs and Sections) */}
-          <div>
-            <TabNavigation />
-          </div>
-  
-          {/* Right Column (Event Cards) */}
-          <div>
-            <EventList />
-          </div>
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Full-width Profile Section without any space */}
+      <ProfileHead /> {/* Include the ProfileHead component to render the "Create Your Profile" section */}
+      <ProfileHeader />
+
+      {/* Grid Layout for Tabs, Sections, and Event List */}
+      <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8">
+        {/* Left Column (Tabs and Sections) */}
+        <div>
+          <TabNavigation />
+        </div>
+
+        {/* Right Column (Event Cards) */}
+        <div>
+          <EventList />
         </div>
       </div>
-    );
-  }
-  
-  // ProfileHead Component (used for "Create Your Profile")
-  export const ProfileHead = () =>  {
-      return (
-        <div>
-          {/* Header */}
-          <header className="w-full h-[44px] bg-purple-200 relative flex justify-center items-center p-4">
-            <div className="flex items-center space-x-2">
-              <h1 className="text-base leading-[1.3] capitalize font-semibold text-purple-500">
-                Create Your Profile
-              </h1>
-              {/* External Link Image */}
-              <Image
-                src="/external-link.svg" // Path to your image in the public folder
-                alt="External link"
-                width={16}
-                height={16}
-                className="inline"
-              />
-            </div>
-          </header>
+    </div>
+  );
+}
+
+// ProfileHead Component (used for "Create Your Profile")
+export const ProfileHead = () => {
+  return (
+    <div>
+      {/* Header */}
+      <header className="w-full h-[44px] bg-purple-200 relative flex justify-center items-center p-4">
+        <div className="flex items-center space-x-2">
+          <h1 className="text-base leading-[1.3] capitalize font-semibold text-purple-500">
+            Create Your Profile
+          </h1>
+          {/* External Link Image */}
+          <Image
+            src="/external-link.svg" // Path to your image in the public folder
+            alt="External link"
+            width={16}
+            height={16}
+            className="inline"
+          />
         </div>
-      );
-  };
+      </header>
+    </div>
+  );
+};
 
 export const TabNavigation = () => {
   const [selectedTab, setSelectedTab] = useState('about');
@@ -109,7 +111,7 @@ const AboutSection = () => (
     </div>
 
     {/* About Text */}
-    <p className="text-gray-600 mb-6">
+    <p className="text-gray-600 mb-6 text-sm">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
       when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -125,30 +127,25 @@ const AboutSection = () => (
         {/* Social Media Links */}
         <div className="flex items-center">
           <img src="/icons/facebook.svg" alt="Facebook" className="w-5 h-5 mr-3" />
-          <span className="text-gray-700">Facebook</span>
+          <span className="text-gray-700 text-sm">Facebook</span>
         </div>
         <div className="flex items-center">
           <img src="/icons/instagram.svg" alt="Instagram" className="w-5 h-5 mr-3" />
-          <span className="text-gray-700">Instagram</span>
+          <span className="text-gray-700 text-sm">Instagram</span>
         </div>
         <div className="flex items-center">
           <img src="/icons/twitter.svg" alt="Twitter" className="w-5 h-5 mr-3" />
-          <span className="text-gray-700">Twitter</span>
+          <span className="text-gray-700 text-sm">Twitter</span>
         </div>
         <div className="flex items-center">
           <img src="/icons/youtube.svg" alt="YouTube" className="w-5 h-5 mr-3" />
-          <span className="text-gray-700">YouTube</span>
+          <span className="text-gray-700 text-sm">YouTube</span>
         </div>
         <div className="flex items-center">
           <img src="/icons/whatsapp.svg" alt="WhatsApp" className="w-5 h-5 mr-3" />
-          <span className="text-gray-700">WhatsApp</span>
+          <span className="text-gray-700 text-sm">WhatsApp</span>
         </div>
       </div>
-    </div>
-
-    {/* Footer (Powered By) */}
-    <div className="text-gray-500 text-sm mt-12 flex justify-center">
-      Powered by <a href="#" className="text-purple-600 font-bold hover:underline ml-1">Uproach.Me</a>
     </div>
   </div>
 );
@@ -168,7 +165,6 @@ const ExperienceSection = () => (
     <p className="text-gray-600">5 years in Web Development...</p>
   </div>
 );
-
 // Event List Component
 const EventList = () => (
     <div className="p-4 bg-purple-100">
