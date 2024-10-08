@@ -3,10 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter(); // Initialize the router
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -32,13 +35,11 @@ export default function SignupPage() {
 
     const data = await response.json();
 
-    if (response.ok) {
-      // Handle success (e.g., redirect to a welcome page)
-      console.log(data.message);
-    } else {
-      // Handle error (e.g., show error message)
-      setErrorMessage(data.message);
-    }
+    if (!response.ok) {
+        throw new Error(data.message || 'Signup failed'); // Handle login failure
+      }
+      // Redirect to the home page after successful login
+      router.push('/home'); // Adjust the redirection as needed
   };
 
   return (
@@ -138,12 +139,9 @@ export default function SignupPage() {
               </div>
             </div>
 
-            <button className="w-full bg-purple-600 text-white p-3 rounded-md font-bold">
-              Get started
+            <button type="submit" className="w-full bg-purple-600 text-white p-3 rounded-md font-bold">
+              Get Started
             </button>
-            {errorMessage && (
-              <p className="text-red-500 text-xs mt-2">{errorMessage}</p>
-            )}
           </form>
           <p className="text-xs text-center mt-4">
             By signing up, you agree to our{' '}
