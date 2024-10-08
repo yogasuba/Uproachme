@@ -26,4 +26,59 @@
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background: #555; /* Scrollbar color on hover */
   }
+
+/* globals.css */
+
+@keyframes subtleFloat {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(0, -10px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  .classicImage {
+    animation: subtleFloat 6s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out;
+  }
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  /* Override the default checkbox appearance */
+input[type="checkbox"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    position: relative;
+    outline: none;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: black;
+  }
+  
+  input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: white;
+    font-size: 0.75rem;
+  }
   
