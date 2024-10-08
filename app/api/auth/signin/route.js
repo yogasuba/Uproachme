@@ -19,7 +19,7 @@ export async function POST(request) {
     });
 
     if (!user) {
-      return NextResponse.json({ message: 'Invalid email or password' }, { status: 401 });
+      return NextResponse.json({ message: 'User Not Found' }, { status: 401 });
     }
 
     // Compare the provided password with the hashed password

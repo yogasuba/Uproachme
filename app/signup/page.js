@@ -7,9 +7,8 @@ import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State to hold the error message
   const router = useRouter(); // Initialize the router
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -36,10 +35,16 @@ export default function SignupPage() {
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error(data.message || 'Signup failed'); // Handle login failure
-      }
-      // Redirect to the home page after successful login
-      router.push('/home'); // Adjust the redirection as needed
+      // Set the error message if signup fails
+      setErrorMessage(data.message || 'Signup failed');
+      return; // Stop further execution
+    }
+    
+    // Clear error message on successful signup
+    setErrorMessage('');
+
+    // Redirect to the home page after successful signup
+    router.push('/home'); // Adjust the redirection as needed
   };
 
   return (
@@ -47,13 +52,21 @@ export default function SignupPage() {
       {/* Left Side - Signup Form */}
       <div className="w-1/2 bg-white flex flex-col justify-center p-4">
         <div className="max-w-md ml-20">
-        <Image src="/icons/[removal 1.jpg" alt="Uproach Me Logo" width={130} height={50} className='mb-4' />          <h1 className="text-2xl font-bold mb-3">Sign up to Uproach me</h1>
+          <Image src="/icons/[removal 1.jpg" alt="Uproach Me Logo" width={130} height={50} className='mb-4' />
+          <h1 className="text-2xl font-bold mb-3">Sign up to Uproach me</h1>
           <p className="mb-4 text-xs">
             Already have an account?{' '}
             <Link href="/signin" className="text-blue-500">
               Sign in
             </Link>
           </p>
+
+          {/* Error Message Display */}
+          {errorMessage && (
+            <div className="mb-4 p-2 bg-red-200 text-red-800 border border-red-400 rounded">
+              {errorMessage}
+            </div>
+          )}
 
           <div className="flex space-x-4 mb-3">
             <button className="w-1/2 p-2 border rounded-md flex items-center justify-center text-sm">
